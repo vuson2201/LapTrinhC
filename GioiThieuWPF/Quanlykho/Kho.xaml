@@ -1,0 +1,108 @@
+﻿<Window x:Class="Quanlykho.Kho"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:self="clr-namespace:Quanlykho"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Blog" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.CommandBindings>
+        <CommandBinding Command="self:CustomCommands.Add" CanExecute="AddCommand_CanExecute" Executed="AddCommand_Executed"/>
+        <CommandBinding Command="self:CustomCommands.Edit" CanExecute="EditCommand_CanExecute" Executed="EditCommand_Executed"/>
+        <CommandBinding Command="self:CustomCommands.Delete" CanExecute="DeleteCommand_CanExecute" Executed="DeleteCommand_Executed"/>
+    </Window.CommandBindings>
+    <Grid Margin="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Margin="5" Grid.Row="0" Text="Thông tin Blog" FontSize="15" ></TextBlock>
+        <Grid  Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Margin="8 0 0 0" Grid.Column="0" Text="Tiêu đề" />
+            <TextBlock Margin="8 0 0 0" Grid.Column="1" Text="Ngày xuất bản" />
+            <TextBlock Margin="8 0 0 0" Grid.Column="2" Text="Nội dung" />
+            
+        </Grid>
+        <Grid Margin="5" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                
+            </Grid.ColumnDefinitions>
+
+            <TextBox
+                Text="{Binding ElementName=lvUsers, Path=SelectedItem.Title,Mode=OneWay}"
+                
+                Grid.Column="0"
+                x:Name="txt_Title"
+                Margin="8 0 0 0"
+                VerticalAlignment="Bottom" />
+            <DatePicker Grid.Column="1" 
+                SelectedDate="{Binding ElementName=lvUsers, Path=SelectedItem.PublishDate,Mode=OneWay}"
+                
+                x:Name="txt_PublishDate"
+                Margin="8 0 0 0"
+                VerticalAlignment="Bottom" />
+            <TextBox Grid.Column="2"
+                Text="{Binding ElementName=lvUsers, Path=SelectedItem.Content,Mode=OneWay}"
+                
+                x:Name="txt_Content"
+                Margin="8 0 0 0"
+                VerticalAlignment="Bottom" />
+        </Grid>
+        <Grid Margin="5" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Command="self:CustomCommands.Add"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                Width="100"
+                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
+                Thêm
+            </Button>
+            <Button Grid.Column="1" Command="self:CustomCommands.Edit"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                Width="100"
+                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
+                Sửa
+            </Button>
+            <Button Grid.Column="2" Command="self:CustomCommands.Delete"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                Width="100"
+                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
+                Xóa
+            </Button>
+        </Grid>
+        
+        <DataGrid Margin="5" Grid.Row="4" x:Name="lvUsers" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True"  Header="ID" Binding="{Binding Id}"/>
+
+                <DataGridTextColumn IsReadOnly="True" Header="Tiêu đề" Binding="{Binding Title}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Ngày xuất bản" Binding="{Binding PublishDate}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        
+    </Grid>
+</Window>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Quanlykho": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
