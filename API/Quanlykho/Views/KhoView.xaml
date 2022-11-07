@@ -1,0 +1,96 @@
+﻿<Window x:Class="Quanlykho.Views.KhoView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Quanlykho.Views"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="KhoView" Height="450" Width="1000" WindowStartupLocation="CenterScreen">
+    <Grid Margin="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Margin="5" Grid.Row="0" Text="Thông tin Blog" FontSize="15" ></TextBlock>
+        <Grid  Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Margin="8 0 0 0" Grid.Column="0" Text="Tiêu đề" />
+            <TextBlock Margin="8 0 0 0" Grid.Column="1" Text="Ngày xuất bản" />
+            <TextBlock Margin="8 0 0 0" Grid.Column="2" Text="Nội dung" />
+
+        </Grid>
+        <Grid Margin="5" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0" x:Name="Title"
+                Text="{Binding Title,ValidatesOnExceptions=True,UpdateSourceTrigger=PropertyChanged}"
+                Margin="8 0 0 0"
+                VerticalAlignment="Bottom" />
+            <DatePicker Grid.Column="1" x:Name="PublishDate"
+                
+                Margin="8 0 0 0"
+                VerticalAlignment="Bottom" />
+            <TextBox Grid.Column="2" x:Name="Content"
+                Text="{Binding Content,ValidatesOnExceptions=True,UpdateSourceTrigger=PropertyChanged}"
+                Margin="8 0 0 0"
+                VerticalAlignment="Bottom" />
+        </Grid>
+        <Grid Margin="5" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0" Command="{Binding AddCommand}"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                Width="100"
+                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
+                Thêm
+            </Button>
+            <Button Grid.Column="1" Command="{Binding EditCommand}"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                Width="100"
+                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
+                Sửa
+            </Button>
+            <Button Grid.Column="2" Command="{Binding DeleteCommand}"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                Width="100"
+                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
+                Xóa
+            </Button>
+        </Grid>
+
+        <DataGrid Margin="5" Grid.Row="4" ItemsSource="{Binding articles}" SelectedItem="{Binding SelectedItem,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True"  Header="ID" Binding="{Binding Id}"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Tiêu đề" Binding="{Binding Title}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Ngày xuất bản" Binding="{Binding PublishDate,StringFormat='dd/MM/yyyy'}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>
