@@ -1,0 +1,25 @@
+﻿<ig:OutlookBarGroup x:Class="Module1.Menus.MailGroup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:local="clr-namespace:Module1.Menus"
+                    xmlns:prism="http://prismlibrary.com/"
+                    prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:ig="http://schemas.infragistics.com/xaml/wpf"
+                    xmlns:igxam="http://schemas.infragistics.com/xaml"
+                    Header="Mail">
+    <Grid>
+        <igxam:XamDataTree x:Name="DataTree" ItemsSource="{Binding Items}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="ActiveNodeChanged">
+                    <prism:InvokeCommandAction Command="{Binding SelectedCommand}" TriggerParameterPath="NewActiveTreeNode.Data" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <igxam:XamDataTree.GlobalNodeLayouts>
+                <igxam:NodeLayout Key="GlobalLayout" TargetTypeName="NavigationItem" DisplayMemberPath="Caption"/>
+            </igxam:XamDataTree.GlobalNodeLayouts>
+        </igxam:XamDataTree>
+    </Grid>
+</ig:OutlookBarGroup>
